@@ -33,8 +33,6 @@ spec:
             {{- toYaml .Values.realtime.securityContext | nindent 12 }}
           image: "{{ .Values.realtime.image.repository }}:{{ .Values.realtime.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.realtime.image.pullPolicy }}
-          command: ["/bin/sh"]
-          args: ["-c", "./prod/rel/realtime/bin/realtime eval Realtime.Release.migrate && ./prod/rel/realtime/bin/realtime start"]
           env:
             {{- range $key, $value := .Values.realtime.environment }}
             - name: {{ $key }}
